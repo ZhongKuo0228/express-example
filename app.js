@@ -1,10 +1,9 @@
-"use strict";
-
+//Express Server Example v1.0
 import express from "express";
 
 // Constants
 const PORT = 3000;
-const HOST = "localhost";
+const HOST = "0.0.0.0";
 
 // App
 const app = express();
