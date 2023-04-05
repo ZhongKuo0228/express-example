@@ -1,4 +1,4 @@
-//Express Server Example v1.0
+//Express Server Example v1.2
 import express from "express";
 
 // Constants
@@ -14,3 +14,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, HOST, () => {
     console.log(`Running on http://${HOST}:${PORT}`);
 });
+
+//test DB connect
+import pool from "./models/DBpool.js";
+import cache from "./models/cache.js";

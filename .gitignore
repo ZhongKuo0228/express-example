@@ -11,5 +11,6 @@ node_modules
 #檔案
 .DS_Store
 *.env
+*.env-inLocal
 
 
