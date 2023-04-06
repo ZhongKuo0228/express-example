@@ -16,5 +16,5 @@ app.listen(PORT, HOST, () => {
 });
 
 //test DB connect
-import pool from "./models/DBpool.js";
+import db from "./models/DBpool.js";
 import cache from "./models/cache.js";

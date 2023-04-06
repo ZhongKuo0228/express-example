@@ -1,33 +1,24 @@
-//---MySQL Connect------------------------------------
-import mysql from "mysql2/promise";
-import dotenv from "dotenv";
-dotenv.config();
+//---Sqlite Connect------------------------------------
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
 
-let pool;
-
-function createPool() {
-    let pool = mysql.createPool({
-        host: process.env.MYSQL_HOST,
-        user: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
-        database: process.env.MYSQL_DATABASE,
-        port: 3306,
-    });
-
-    pool.getConnection()
-        .then((connection) => {
-            console.log("MySQL connected successfully");
-            connection.release();
-        })
-        .catch((error) => {
-            console.log("MySQL connection error:", error.message);
-            setTimeout(() => {
-                console.log("Retrying MySQL connection...");
-                createPool();
-            }, 5000);
+async function createConnection() {
+    try {
+        const db = await open({
+            filename: "./models/default_db.db",
+            driver: sqlite3.Database,
         });
+        console.log("SQLite connected successfully");
+        return db;
+    } catch (error) {
+        console.log("SQLite connection error:", error.message);
+        setTimeout(() => {
+            console.log("Retrying SQLite connection...");
+            createConnection();
+        }, 5000);
+    }
 }
 
-createPool();
+const db = await createConnection();
 
-export default pool;
+export default db;
